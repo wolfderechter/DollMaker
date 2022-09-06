@@ -1,0 +1,68 @@
+#canvas {
+    border: 1px solid black;
+}
+
+.canvas {
+    display: inline;
+}
+
+.options {
+    /* overflow: hidden; */
+    /* overflow-y: scroll;
+    width: 12%;
+    height: 550px;
+    margin-right: 25%;
+    white-space: nowrap;
+    float: right;
+    border: 1px solid black; */
+
+    float: right;
+    margin-right: 25%;
+    width: 12%;
+    height: 550px;
+    overflow-y: auto;
+}
+
+.clickedOption {
+    border: 3px solid black;
+}
+
+.options ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    list-style: none;
+}
+
+.options li {
+    background: gray;
+    width: 5em;
+    height: 5em;
+    margin: .5em;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.options li img {
+    max-width: 5em;
+}
+
+.categories {
+    /* border: 1px solid black; */
+    overflow: auto;
+    width: 80%;
+    white-space: nowrap;
+}
+
+
+.categories a {
+    border: 1px solid black;
+    list-style: none;
+    padding: 40px;
+    margin: 5px 15px;
+    display: inline-block;
+    cursor: pointer;
+}
