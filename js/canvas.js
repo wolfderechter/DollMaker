@@ -1,5 +1,7 @@
 const categories = document.querySelectorAll(".categories > a");
 const options = document.getElementById("optionsUl");
+const canvas = document.getElementById("canvas");
+const exportCanvasBtn = document.getElementById("exportCanvasBtn");
 var currentCategory;
 
 class Doll {
@@ -48,6 +50,7 @@ class Doll {
     });
   }
 
+  // draw() will loop through all the options in this doll object and place them all on the canvas
   draw() {
     const ctx = canvas.getContext("2d");
     var x = 100;
@@ -71,8 +74,6 @@ class Option {
 const doll = new Doll();
 
 window.addEventListener("load", () => {
-  const canvas = document.querySelector("#canvas");
-
   // resize the canvas
   canvas.height = window.innerHeight * 0.75;
   canvas.width = window.innerWidth * 0.6;
@@ -84,8 +85,13 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", () => {
   canvas.height = window.innerHeight * 0.75;
   canvas.width = window.innerWidth * 0.6;
+
+  doll.draw();
 });
 
+//Create all the categories, when a category is clicked dynamically create all the corresponding options
+//by loading images from the current category folder and checking if the image exists
+//if the image exists, create a new option li
 categories.forEach((cat) => {
   cat.addEventListener("click", (cat) => {
     // this will empty my options so previous loaded options will be removed
@@ -138,33 +144,18 @@ categories.forEach((cat) => {
     }
   });
 });
-// categories.forEach(cat => {
-//     cat.addEventListener('click', (cat) => {
-//         options.innerHTML = ''
-//         var catImageFolder = `./images/${cat.target.innerText}/`;
-//         for (let index = 0; index < 10; index++) {
-//             var img = new Image()
-//             img.src = `./images/${cat.target.innerText}/${index}.jpg`
-//             if(img.height != 0){
-//                 var option = document.createElement('li')
-//                 var image = document.createElement('img')
-//                 image.src = `./images/${cat.target.innerText}/${index}.jpg`
-//                 option.innerText = `${cat.target.innerText}`
-//                 option.appendChild(image)
 
-//                 option.addEventListener('click', (clickedOption) => {
-//                     console.log(clickedOption.target)
-//                     addToCanvas(clickedOption)
-//                 })
-//                 options.appendChild(option)
-//             }
-//         }
+//Export the canvas to an image
+exportCanvasBtn.addEventListener("click", () => exportCanvas());
+function exportCanvas() {
+  //this will export the canvas to a Data URl that can be downloaded
+  canvasDataURL = canvas.toDataURL("png", 1.0);
 
-//     })
-// })
+  //Create a new a tag to download the DataURL just exported
+  var link = document.createElement("a");
+  link.download = "doll.png";
+  link.href = canvasDataURL;
 
-// function addToCanvas(option){
-
-//     const ctx = canvas.getContext('2d');
-//     ctx.drawImage(option.target, 100, 100, 200, 200)
-// }
+  //By clicking on the new a tag, we automatically download the canvasDataURL as a png without having to click on anything
+  link.click();
+}
