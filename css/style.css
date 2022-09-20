@@ -282,3 +282,29 @@
     top: -380px;
   }
 }
+
+@media screen and (max-height: 670px){
+  #canvas{
+    width: 280px;
+    height: 350px;
+  }
+  .options li img {
+    width: 70%;
+  }
+
+  #exportCanvasBtn{
+    left: 210px;
+  }
+  #switchDollBtn{
+    top: -330px;
+  }
+  #toggleMultiselectBtn{
+    top: -330px;
+    left:200px;
+  }
+
+  .categories a {
+    font-size: 12px;
+  }
+
+}
