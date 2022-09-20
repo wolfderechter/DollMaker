@@ -18,6 +18,7 @@
 
 .canvas {
     display: inline;
+    position: relative;
     /* width: 700px; */
     /* height: min-content; */
     /* max-height: 450px; */
@@ -125,19 +126,35 @@
   }
   
 #exportCanvasBtn{
-  position: relative;
-  /* top: -25px; */
-  /* left: 125px; */
-  top: 45px;
-  left: 10px;
-
+  position: absolute;
+  left: 300px;
+  bottom: 13px;
+  font-size: 12px;
 
   cursor: pointer;
   background-color: pink;
   border: 0;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
 }
+
+#toggleMultiselectBtn{
+  position: absolute;
+  left: 285px;
+  top: 13px;
+  font-size: 12px;
+
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#toggleMultiselectBtn.active{
+  background-color: pink;
+}
+
 
 
 @media screen and (max-width: 500px){
@@ -186,4 +203,11 @@
     width: 80%;
     /* width: 80%; */
   } 
+
+  #exportCanvasBtn{
+    right: unset;
+    bottom: unset;
+    left: 230px;
+    top: -18px;
+  }
 }

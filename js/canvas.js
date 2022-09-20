@@ -2,7 +2,9 @@ const categories = document.querySelectorAll(".categories > a");
 const options = document.getElementById("optionsUl");
 const canvas = document.getElementById("canvas");
 const exportCanvasBtn = document.getElementById("exportCanvasBtn");
+const toggleMultiselectBtn = document.getElementById("toggleMultiselectBtn");
 var currentCategory;
+var toggleMultiselect;
 
 class Doll {
   constructor() {
@@ -40,14 +42,14 @@ class Doll {
   }
 
   removeAllOptionsFromCategory(category) {
-    this.options.forEach((opt, index) => {
-      if (index > -1) {
-        if (opt.category == category) {
-          this.options.splice(index, 1);
-          return;
-        }
+    //we have to loop backwards here and splice when there is a match or else not all options will be reached
+    var i;
+    i = this.options.length;
+    while (i--) {
+      if (this.options[i].category == category) {
+        this.options.splice(i, 1);
       }
-    });
+    }
   }
 
   // draw() will loop through all the options in this doll object and place them all on the canvas
@@ -103,9 +105,7 @@ window.addEventListener("resize", () => {
 //if the image exists, create a new option li
 categories.forEach((cat) => {
   cat.addEventListener("click", (cat) => {
-    // this will empty my options so previous loaded options will be removed
-    // options.innerHTML = "";
-    console.log(options.children);
+    // make sure my options element is visisble again
     options.parentElement.style.visibility = "visible";
 
     // remove clickedCategory on each item, and add on the last clicked item
@@ -114,7 +114,10 @@ categories.forEach((cat) => {
     });
     cat.target.classList.add("clickedCategory");
     currentCategory = cat.target.innerText;
+
+    // this will empty my options so previous loaded options will be removed
     options.innerHTML = "";
+
     for (let index = 0; index < 10; index++) {
       var img = new Image();
       img.src = `./images/${currentCategory}/${index}.png`;
@@ -133,19 +136,41 @@ categories.forEach((cat) => {
           if (
             clickedOption.target.parentNode.classList.contains("clickedOption")
           ) {
+            //Option is already selected, remove it
+
             clickedOption.target.parentNode.classList.toggle("clickedOption");
             removeOption = new Option(currentCategory, clickedOption.target);
             doll.removeOption(removeOption);
             doll.draw();
           } else {
-            // new option
-            clickedOption.target.parentNode.classList.toggle("clickedOption");
+            // Select a new option
 
-            // clickedOption.target should show my image src but is not ideal
-            // and should be replaced with something else, when title is clicked
-            // => error
-            newOption = new Option(currentCategory, clickedOption.target);
-            doll.addOption(newOption);
+            //If toggleMultiselect is false we first remove all the other options and then add the new option
+            if (toggleMultiselect) {
+              clickedOption.target.parentNode.classList.toggle("clickedOption");
+
+              // clickedOption.target should show my image src but is not ideal
+              // and should be replaced with something else, when title is clicked
+              // => error
+              var newOption = new Option(currentCategory, clickedOption.target);
+              doll.addOption(newOption);
+            } else {
+              //remove all the previous options in the ui
+              const optionsArray = [...options.children];
+              optionsArray.forEach((option) => {
+                option.classList.remove("clickedOption");
+              });
+
+              //remove all the previous options in the doll object
+              doll.removeAllOptionsFromCategory(currentCategory);
+
+              //add the new clicked option in the ui
+              clickedOption.target.parentNode.classList.toggle("clickedOption");
+
+              //add the new clicked option in the doll object
+              var newOption = new Option(currentCategory, clickedOption.target);
+              doll.addOption(newOption);
+            }
 
             doll.draw();
           }
@@ -170,3 +195,25 @@ function exportCanvas() {
   //By clicking on the new a tag, we automatically download the canvasDataURL as a png without having to click on anything
   link.click();
 }
+
+toggleMultiselectBtn.addEventListener("click", () => {
+  toggleMultiselectBtn.classList.toggle("active");
+
+  if (toggleMultiselectBtn.classList.contains("active")) {
+    toggleMultiselect = true;
+  } else {
+    toggleMultiselect = false;
+
+    //clear all the previous selected elements
+    //remove all the previous options in the ui
+    const optionsArray = [...options.children];
+    optionsArray.forEach((option) => {
+      option.classList.remove("clickedOption");
+    });
+
+    //remove all the previous options in the doll object
+    doll.removeAllOptionsFromCategory(currentCategory);
+
+    doll.draw();
+  }
+});
