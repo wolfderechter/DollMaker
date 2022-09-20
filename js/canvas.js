@@ -10,7 +10,7 @@ class Doll {
   constructor() {
     this.options = [];
     var bodyImg = new Image();
-    bodyImg.src = "/images/body/0.png";
+    bodyImg.src = "./images/body/0.png";
     this.body = bodyImg;
   }
 
@@ -120,12 +120,12 @@ categories.forEach((cat) => {
 
     for (let index = 0; index < 10; index++) {
       var img = new Image();
-      img.src = `./images/${currentCategory}/${index}.png`;
+      img.src = `./images/${currentCategory.toLowerCase()}/${index}.png`;
 
       img.onload = () => {
         var option = document.createElement("li");
         var image = document.createElement("img");
-        image.src = `./images/${currentCategory}/${index}.png`;
+        image.src = `./images/${currentCategory.toLowerCase()}/${index}.png`;
 
         if (doll.hasOption(currentCategory, image)) {
           option.classList.add("clickedOption");
