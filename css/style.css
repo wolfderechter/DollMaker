@@ -1,4 +1,4 @@
-#body{
+#body {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -9,124 +9,121 @@
 }
 
 #canvas {
-    border: 1px solid black;
-    border-radius: 5px;
-    border: 0;
-    background-color: #fcdced;
-    width: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.107);
+  border-radius: 5px;
+  border: 0;
+  background-color: #fcdced;
+  width: 400px;
 }
 
 .canvas {
-    display: inline;
-    position: relative;
-    /* width: 700px; */
-    /* height: min-content; */
-    /* max-height: 450px; */
+  display: inline;
+  position: relative;
+  /* width: 700px; */
+  /* height: min-content; */
+  /* max-height: 450px; */
 }
 
 .options {
-    float: right;
-    /* margin-right: 35%; */
-    margin-right: -5%;
-    /* width: 12%; */
-    max-height: 550px;
-    overflow-y: auto;
-    visibility: hidden;
+  float: right;
+  /* margin-right: 35%; */
+  margin-right: -5%;
+  /* width: 12%; */
+  max-height: 550px;
+  overflow-y: auto;
+  visibility: hidden;
 }
 
 .clickedOption {
-    border: 3px solid black;
-    background-color: pink;
+  border: 3px solid black;
+  background-color: pink;
 }
 
 .options ul {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    list-style: none;
-    padding-left: 0;
-    width: 85px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  list-style: none;
+  padding-left: 0;
+  width: 85px;
 }
 
 .options li {
-    /* background: rgba(128, 128, 128, 0.107); */
-    /* width: 5em;
+  /* background: rgba(128, 128, 128, 0.107); */
+  /* width: 5em;
     height: 5em;
     margin: .5em;
     text-align: center; */
-    cursor: pointer;
-    justify-content: center;
-    border: 1px solid rgba(0, 0, 0, 0.107);
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    margin-right: 25px;
+  cursor: pointer;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.107);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  margin-right: 25px;
 }
 
 .options li img {
-    width: 100%;
+  width: 100%;
 }
 
 .categories {
-    /* border: 1px solid black; */
-    overflow: auto;
-    /* width: 50%; */
-    margin-top: 20px;
-    /* max-width: 35%; */
-    /* width: 50%; */
-    width: 500px;
-    white-space: nowrap;
+  /* border: 1px solid black; */
+  overflow: auto;
+  /* width: 50%; */
+  margin-top: 20px;
+  /* max-width: 35%; */
+  /* width: 50%; */
+  width: 500px;
+  white-space: nowrap;
 }
 
-
 .categories a {
-    border: 1px solid black;
-    border-radius: 15px;
-    list-style: none;
-    padding: 40px;
-    margin: 5px 15px;
-    display: inline-block;
-    cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.107);
+  border-radius: 15px;
+  list-style: none;
+  padding: 40px;
+  margin: 5px 15px;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .clickedCategory {
-    border: 3px solid black;
-    background-color: pink;
+  background-color: pink;
 }
 
 .options::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-    border-radius: 100px;
-  }
+  background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  border-radius: 100px;
+}
 
-  .options::-webkit-scrollbar {
-    width: 16px;
-  }
-  
-  .options::-webkit-scrollbar-track {
-    background-color: #e4e4e473;
-    border-radius: 100px;
-  }
-  
-  
+.options::-webkit-scrollbar {
+  width: 16px;
+}
+
+.options::-webkit-scrollbar-track {
+  background-color: #e4e4e473;
+  border-radius: 100px;
+}
+
 .categories::-webkit-scrollbar-thumb {
-    background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-    border-radius: 100px;
-  }
+  background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  border-radius: 100px;
+}
 
-  .categories::-webkit-scrollbar {
-    width: 16px;
-  }
-  
-  .categories::-webkit-scrollbar-track {
-    background-color: #e4e4e473;
-    border-radius: 100px;
-  }
-  
-#exportCanvasBtn{
+.categories::-webkit-scrollbar {
+  width: 16px;
+}
+
+.categories::-webkit-scrollbar-track {
+  background-color: #e4e4e473;
+  border-radius: 100px;
+}
+
+#exportCanvasBtn {
   position: absolute;
   left: 300px;
   bottom: 13px;
@@ -139,7 +136,7 @@
   padding: 5px;
 }
 
-#toggleMultiselectBtn{
+#toggleMultiselectBtn {
   position: absolute;
   left: 285px;
   top: 10px;
@@ -152,14 +149,12 @@
   padding: 5px;
 }
 
-#toggleMultiselectBtn.active{
+#toggleMultiselectBtn.active {
   background-color: pink;
 }
 
-
-
 /* Modal: popup screen to switch doll */
-#switchDollBtn{
+#switchDollBtn {
   position: absolute;
   left: 8px;
   top: 10px;
@@ -180,8 +175,8 @@
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 .dollsModal ul {
   list-style: none;
@@ -207,14 +202,12 @@
   width: 100%;
 }
 
-
-
-@media screen and (max-width: 500px){
-  #body{
+@media screen and (max-width: 500px) {
+  #body {
     display: block;
   }
 
-  .categories{
+  .categories {
     max-width: 100%;
     width: 85%;
     margin-top: 5px;
@@ -224,13 +217,13 @@
     padding: 25px;
   }
 
-  #canvas{
+  #canvas {
     height: 400px;
     width: 300px;
     margin-left: 30px;
   }
 
-  .options{
+  .options {
     float: none;
     width: 100%;
   }
@@ -242,29 +235,28 @@
     flex-wrap: wrap;
     /* width: 150%; */
     height: 70px;
-
   }
 
   .options li {
     width: 60px;
   }
 
-   .options li img {
+  .options li img {
     /* height: 150%;
     width: 100%; */
     height: 75px;
     width: 80%;
     /* width: 80%; */
-  } 
+  }
 
-  #exportCanvasBtn{
+  #exportCanvasBtn {
     right: unset;
     bottom: unset;
     left: 230px;
     top: -18px;
   }
 
-  #toggleMultiselectBtn{
+  #toggleMultiselectBtn {
     right: unset;
     bottom: unset;
     left: 215px;
@@ -275,7 +267,7 @@
     background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
   }
 
-  #switchDollBtn{
+  #switchDollBtn {
     right: unset;
     bottom: unset;
     left: 37px;
@@ -283,8 +275,8 @@
   }
 }
 
-@media screen and (max-height: 670px){
-  #canvas{
+@media screen and (max-height: 670px) {
+  #canvas {
     width: 280px;
     height: 350px;
   }
@@ -292,19 +284,18 @@
     width: 70%;
   }
 
-  #exportCanvasBtn{
+  #exportCanvasBtn {
     left: 210px;
   }
-  #switchDollBtn{
+  #switchDollBtn {
     top: -330px;
   }
-  #toggleMultiselectBtn{
+  #toggleMultiselectBtn {
     top: -330px;
-    left:200px;
+    left: 200px;
   }
 
   .categories a {
     font-size: 12px;
   }
-
 }
