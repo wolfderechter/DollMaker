@@ -74,7 +74,8 @@
     /* width: 50%; */
     margin-top: 20px;
     /* max-width: 35%; */
-    width: 50%;
+    /* width: 50%; */
+    width: 500px;
     white-space: nowrap;
 }
 
@@ -165,6 +166,7 @@
   .categories{
     max-width: 100%;
     width: 85%;
+    margin-top: 5px;
   }
 
   .categories a {
@@ -188,7 +190,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     /* width: 150%; */
-    max-height: 75px;
+    height: 70px;
 
   }
 
@@ -209,5 +211,16 @@
     bottom: unset;
     left: 230px;
     top: -18px;
+  }
+
+  #toggleMultiselectBtn{
+    right: unset;
+    bottom: unset;
+    left: 215px;
+    top: -380px;
+  }
+
+  .options::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
   }
 }

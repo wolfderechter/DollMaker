@@ -132,7 +132,8 @@ categories.forEach((cat) => {
         }
         option.appendChild(image);
 
-        option.addEventListener("click", (clickedOption) => {
+        //add click listener on option.firstchild so the li isn't accidentally clicked
+        option.firstChild.addEventListener("click", (clickedOption) => {
           if (
             clickedOption.target.parentNode.classList.contains("clickedOption")
           ) {
