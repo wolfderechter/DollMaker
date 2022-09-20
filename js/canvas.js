@@ -53,14 +53,18 @@ class Doll {
   // draw() will loop through all the options in this doll object and place them all on the canvas
   draw() {
     const ctx = canvas.getContext("2d");
-    var x = 100;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(this.body, 250, 0, 250, 500);
+    ctx.drawImage(this.body, 50, 20, 250, 500);
 
     this.options.forEach((opt) => {
-      ctx.drawImage(opt.image, 250, 0, 250, 500);
-      // x = x+10;
+      ctx.drawImage(opt.image, 50, 20, 250, 500);
     });
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // ctx.drawImage(this.body, 250, 0, 250, 500);
+
+    // this.options.forEach((opt) => {
+    //   ctx.drawImage(opt.image, 250, 0, 250, 500);
+    // });
   }
 }
 
@@ -75,16 +79,21 @@ const doll = new Doll();
 
 window.addEventListener("load", () => {
   // resize the canvas
+  // canvas.height = window.innerHeight * 0.75;
+  // canvas.width = window.innerWidth * 0.6;
+
   canvas.height = window.innerHeight * 0.75;
-  canvas.width = window.innerWidth * 0.6;
+  canvas.width = "400";
 
   doll.draw();
 });
 
 // when resizing the browser window, resize the canvas
 window.addEventListener("resize", () => {
+  // canvas.height = window.innerHeight * 0.75;
+  // canvas.width = window.innerWidth * 0.6;
   canvas.height = window.innerHeight * 0.75;
-  canvas.width = window.innerWidth * 0.6;
+  canvas.width = "400";
 
   doll.draw();
 });
@@ -95,7 +104,9 @@ window.addEventListener("resize", () => {
 categories.forEach((cat) => {
   cat.addEventListener("click", (cat) => {
     // this will empty my options so previous loaded options will be removed
-    options.innerHTML = "";
+    // options.innerHTML = "";
+    console.log(options.children);
+    options.parentElement.style.visibility = "visible";
 
     // remove clickedCategory on each item, and add on the last clicked item
     categories.forEach((category) => {
@@ -103,7 +114,7 @@ categories.forEach((cat) => {
     });
     cat.target.classList.add("clickedCategory");
     currentCategory = cat.target.innerText;
-
+    options.innerHTML = "";
     for (let index = 0; index < 10; index++) {
       var img = new Image();
       img.src = `./images/${currentCategory}/${index}.png`;
