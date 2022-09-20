@@ -142,7 +142,7 @@
 #toggleMultiselectBtn{
   position: absolute;
   left: 285px;
-  top: 13px;
+  top: 10px;
   font-size: 12px;
 
   background-color: rgb(255, 255, 255);
@@ -154,6 +154,57 @@
 
 #toggleMultiselectBtn.active{
   background-color: pink;
+}
+
+
+
+/* Modal: popup screen to switch doll */
+#switchDollBtn{
+  position: absolute;
+  left: 8px;
+  top: 10px;
+  font-size: 12px;
+
+  background-color: pink;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px;
+}
+.dollsModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.dollsModal ul {
+  list-style: none;
+  margin: 1% auto; /* 15% from the top and centered */
+  padding: 20px;
+  width: 60%;
+  background-color: white;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dollsModal li {
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.107);
+  border-radius: 15px;
+
+  width: 200px;
+  margin: 10px;
+}
+
+.dollsModal li img {
+  width: 100%;
 }
 
 
@@ -222,5 +273,12 @@
 
   .options::-webkit-scrollbar-thumb {
     background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
+  }
+
+  #switchDollBtn{
+    right: unset;
+    bottom: unset;
+    left: 37px;
+    top: -380px;
   }
 }

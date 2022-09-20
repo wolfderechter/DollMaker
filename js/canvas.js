@@ -1,10 +1,16 @@
 const categories = document.querySelectorAll(".categories > a");
 const options = document.getElementById("optionsUl");
+const dollsUl = document.getElementById("dollsUl");
 const canvas = document.getElementById("canvas");
 const exportCanvasBtn = document.getElementById("exportCanvasBtn");
 const toggleMultiselectBtn = document.getElementById("toggleMultiselectBtn");
+const switchDollBtn = document.getElementById("switchDollBtn");
+var modal = document.getElementById("modal");
+
 var currentCategory;
 var toggleMultiselect;
+var dolls = [];
+var currentDoll;
 
 class Doll {
   constructor() {
@@ -12,6 +18,7 @@ class Doll {
     var bodyImg = new Image();
     bodyImg.src = "./images/body/0.png";
     this.body = bodyImg;
+    this.dataURL = "";
   }
 
   addOption(option) {
@@ -52,6 +59,10 @@ class Doll {
     }
   }
 
+  setDataURL(url) {
+    this.dataURL = url;
+  }
+
   // draw() will loop through all the options in this doll object and place them all on the canvas
   draw() {
     const ctx = canvas.getContext("2d");
@@ -76,18 +87,16 @@ class Option {
     this.image = image;
   }
 }
-
-const doll = new Doll();
-
+currentDoll = new Doll();
 window.addEventListener("load", () => {
-  // resize the canvas
-  // canvas.height = window.innerHeight * 0.75;
-  // canvas.width = window.innerWidth * 0.6;
+  //Create a new doll
+  dolls.push(currentDoll);
 
+  // resize the canvas
   canvas.height = window.innerHeight * 0.75;
   canvas.width = "400";
 
-  doll.draw();
+  currentDoll.draw();
 });
 
 // when resizing the browser window, resize the canvas
@@ -97,7 +106,7 @@ window.addEventListener("resize", () => {
   canvas.height = window.innerHeight * 0.75;
   canvas.width = "400";
 
-  doll.draw();
+  currentDoll.draw();
 });
 
 //Create all the categories, when a category is clicked dynamically create all the corresponding options
@@ -127,7 +136,7 @@ categories.forEach((cat) => {
         var image = document.createElement("img");
         image.src = `./images/${currentCategory.toLowerCase()}/${index}.png`;
 
-        if (doll.hasOption(currentCategory, image)) {
+        if (currentDoll.hasOption(currentCategory, image)) {
           option.classList.add("clickedOption");
         }
         option.appendChild(image);
@@ -141,8 +150,8 @@ categories.forEach((cat) => {
 
             clickedOption.target.parentNode.classList.toggle("clickedOption");
             removeOption = new Option(currentCategory, clickedOption.target);
-            doll.removeOption(removeOption);
-            doll.draw();
+            currentDoll.removeOption(removeOption);
+            currentDoll.draw();
           } else {
             // Select a new option
 
@@ -154,7 +163,7 @@ categories.forEach((cat) => {
               // and should be replaced with something else, when title is clicked
               // => error
               var newOption = new Option(currentCategory, clickedOption.target);
-              doll.addOption(newOption);
+              currentDoll.addOption(newOption);
             } else {
               //remove all the previous options in the ui
               const optionsArray = [...options.children];
@@ -163,17 +172,17 @@ categories.forEach((cat) => {
               });
 
               //remove all the previous options in the doll object
-              doll.removeAllOptionsFromCategory(currentCategory);
+              currentDoll.removeAllOptionsFromCategory(currentCategory);
 
               //add the new clicked option in the ui
               clickedOption.target.parentNode.classList.toggle("clickedOption");
 
               //add the new clicked option in the doll object
               var newOption = new Option(currentCategory, clickedOption.target);
-              doll.addOption(newOption);
+              currentDoll.addOption(newOption);
             }
 
-            doll.draw();
+            currentDoll.draw();
           }
         });
         options.appendChild(option);
@@ -213,8 +222,84 @@ toggleMultiselectBtn.addEventListener("click", () => {
     });
 
     //remove all the previous options in the doll object
-    doll.removeAllOptionsFromCategory(currentCategory);
+    currentDoll.removeAllOptionsFromCategory(currentCategory);
 
-    doll.draw();
+    currentDoll.draw();
   }
+});
+
+switchDollBtn.addEventListener("click", () => {
+  //export current doll canvas to a dataURL to display
+  currentDoll.setDataURL(canvas.toDataURL("png", 1.0));
+
+  // Show modal
+  modal.style.display = "block";
+
+  //save current doll to localstorage?
+
+  //clear earlier dolls
+  dollsUl.innerHTML = "";
+
+  //new doll button
+  var dollOption = document.createElement("li");
+  var text = document.createElement("span");
+  text.textContent = "Create A New Doll";
+  dollOption.style.display = "flex";
+  dollOption.style.flexDirection = "column";
+  dollOption.style.justifyContent = "center";
+  text.style.justifyContent = "center";
+  text.style.textAlign = "center";
+
+  dollOption.appendChild(text);
+
+  dollOption.addEventListener("click", () => {
+    // Close modal
+    modal.style.display = "none";
+
+    currentDoll = new Doll();
+    dolls.push(currentDoll);
+
+    //re draw the current doll
+    currentDoll.draw();
+
+    //clear the selected options in the ui
+    optionsArray = [...options.children];
+    optionsArray.forEach((opt) => {
+      opt.classList.remove("clickedOption");
+    });
+  });
+
+  dollsUl.appendChild(dollOption);
+
+  //show existing dolls
+  dolls.forEach((d, index) => {
+    var dollOption = document.createElement("li");
+    var image = document.createElement("img");
+    image.src = d.dataURL;
+
+    dollOption.appendChild(image);
+
+    dollOption.addEventListener("click", (clickedDoll) => {
+      //switch doll
+      currentDoll = dolls[index];
+
+      // Close modal
+      modal.style.display = "none";
+
+      //re draw the current doll
+      currentDoll.draw();
+
+      //clear the selected options in the ui and select the options in the currentdoll
+      optionsArray = [...options.children];
+      optionsArray.forEach((opt) => {
+        if (currentDoll.hasOption(currentCategory, opt.firstChild)) {
+          opt.classList.add("clickedOption");
+        } else {
+          opt.classList.remove("clickedOption");
+        }
+      });
+    });
+
+    dollsUl.appendChild(dollOption);
+  });
 });
