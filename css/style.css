@@ -262,6 +262,7 @@
     flex-wrap: wrap;
     /* width: 150%; */
     height: 70px;
+    margin-top: 5px;
   }
 
   .options li {
@@ -272,7 +273,7 @@
     /* height: 150%;
     width: 100%; */
     height: 75px;
-    width: 80%;
+    width: 65%;
     /* width: 80%; */
   }
 
@@ -314,15 +315,19 @@
   #saveDollsBtn {
     font-size: 14px;
   }
-}
 
-@media screen and (max-height: 670px) {
+  .options::-webkit-scrollbar {
+    height: 5px;
+  }
+  .categories::-webkit-scrollbar {
+    height: 5px;
+  }
+}
+@media screen and (max-width: 400px) {
+  /* @media screen and (max-height: 670px) { */
   #canvas {
     width: 280px;
     height: 350px;
-  }
-  .options li img {
-    width: 70%;
   }
 
   #exportCanvasBtn {

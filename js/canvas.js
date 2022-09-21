@@ -132,53 +132,7 @@ if (localStorage.getItem("dolls")) {
   });
   modal.style.display = "block";
 
-  //implement delete all dolls
-  // var dollOption = document.createElement("li");
-  // dollOption.classList.add("modalCard");
-  // var text = document.createElement("span");
-  // text.textContent = "Delete all dolls";
-  // dollOption.appendChild(text);
-
-  //on click, localstorage will be cleared
-  // dollOption.addEventListener("click", () => {
-  //   localStorage.removeItem("dolls");
-
-  //   //clear screen
-  //   dolls = [];
-  //   currentDoll = null;
-
-  //   //remove all children except first two: 'delete all dolls' and 'create new doll'
-  //   removeDollsUlChildren();
-  // });
-  // dollsUl.appendChild(dollOption);
-
-  //implement create new doll option
-  // var dollOption = document.createElement("li");
-  // dollOption.classList.add("modalCard");
-  // var text = document.createElement("span");
-  // text.textContent = "Create A New Doll";
-
-  // dollOption.appendChild(text);
-  // dollsUl.appendChild(dollOption);
-
   loadDolls();
-
-  // dollOption.addEventListener("click", () => {
-  //   // Close modal
-  //   modal.style.display = "none";
-
-  //   currentDoll = new Doll();
-  //   dolls.push(currentDoll);
-
-  //   //re draw the current doll
-  //   currentDoll.draw();
-
-  //   //clear the selected options in the ui
-  //   optionsArray = [...options.children];
-  //   optionsArray.forEach((opt) => {
-  //     opt.classList.remove("clickedOption");
-  //   });
-  // });
 } else {
   //No existing dolls => create a new doll
   currentDoll = new Doll();
@@ -186,8 +140,12 @@ if (localStorage.getItem("dolls")) {
 }
 
 window.addEventListener("load", () => {
-  // resize the canvas
-  canvas.height = window.innerHeight * 0.75;
+  // resize the canvas: when small screen enlarge the height so the legs fit the canvas
+  if (window.innerHeight < 600) {
+    canvas.height = window.innerHeight * 0.85;
+  } else {
+    canvas.height = window.innerHeight * 0.75;
+  }
   canvas.width = "400";
 
   currentDoll?.draw();
@@ -332,38 +290,7 @@ switchDollBtn.addEventListener("click", () => {
   //clear earlier dolls
   removeDollsUlChildren();
 
-  //new doll button
-  // var dollOption = document.createElement("li");
-  // var text = document.createElement("span");
-  // text.textContent = "Create A New Doll";
-  // dollOption.style.display = "flex";
-  // dollOption.style.flexDirection = "column";
-  // dollOption.style.justifyContent = "center";
-  // text.style.justifyContent = "center";
-  // text.style.textAlign = "center";
-
-  // dollOption.appendChild(text);
-
-  // dollOption.addEventListener("click", () => {
-  //   // Close modal
-  //   modal.style.display = "none";
-
-  //   currentDoll = new Doll();
-  //   dolls.push(currentDoll);
-
-  //   //re draw the current doll
-  //   currentDoll.draw();
-
-  //   //clear the selected options in the ui
-  //   optionsArray = [...options.children];
-  //   optionsArray.forEach((opt) => {
-  //     opt.classList.remove("clickedOption");
-  //   });
-  // });
-  // dollsUl.appendChild(dollOption);
-
-  //show existing dolls
-  console.log("loading");
+  //Load the existing dolls in the dollsUl
   loadDolls();
 });
 
@@ -411,7 +338,6 @@ saveDollsBtn.addEventListener("click", () => {
 
 function removeDollsUlChildren() {
   while (dollsUl.childElementCount > 2) {
-    console.log("removing", dollsUl.lastChild);
     dollsUl.removeChild(dollsUl.lastChild);
   }
 }
