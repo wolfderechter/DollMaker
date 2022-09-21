@@ -166,6 +166,11 @@ window.addEventListener("resize", () => {
 //if the image exists, create a new option li
 categories.forEach((cat) => {
   cat.addEventListener("click", (cat) => {
+    //add animation
+    cat.target.style.transform = "scale(1.05)";
+    setTimeout(() => {
+      cat.target.style.transform = "scale(1)";
+    }, 200);
     // make sure my options element is visisble again
     options.parentElement.style.visibility = "visible";
 
@@ -195,6 +200,12 @@ categories.forEach((cat) => {
 
         //add click listener on option.firstchild so the li isn't accidentally clicked
         option.firstChild.addEventListener("click", (clickedOption) => {
+          //add animation
+          option.style.transform = "scale(1.05)";
+          setTimeout(() => {
+            option.style.transform = "scale(1)";
+          }, 200);
+
           if (
             clickedOption.target.parentNode.classList.contains("clickedOption")
           ) {
@@ -246,6 +257,12 @@ categories.forEach((cat) => {
 //Export the canvas to an image
 exportCanvasBtn.addEventListener("click", () => exportCanvas());
 function exportCanvas() {
+  //add animation
+  exportCanvasBtn.style.transform = "scale(1.05)";
+  setTimeout(() => {
+    exportCanvasBtn.style.transform = "scale(1)";
+  }, 200);
+
   //this will export the canvas to a Data URl that can be downloaded
   canvasDataURL = canvas.toDataURL("png", 1.0);
 
@@ -259,6 +276,11 @@ function exportCanvas() {
 }
 
 toggleMultiselectBtn.addEventListener("click", () => {
+  //add animation
+  toggleMultiselectBtn.style.transform = "scale(1.05)";
+  setTimeout(() => {
+    toggleMultiselectBtn.style.transform = "scale(1)";
+  }, 200);
   toggleMultiselectBtn.classList.toggle("active");
 
   if (toggleMultiselectBtn.classList.contains("active")) {
@@ -303,10 +325,18 @@ function loadDolls() {
     dollOption.appendChild(image);
 
     dollOption.addEventListener("click", (clickedDoll) => {
+      //add animation
+      dollOption.style.transform = "scale(1.05)";
+      setTimeout(() => {
+        dollOption.style.transform = "scale(1)";
+      }, 200);
+      setTimeout(() => {
+        // Close modal
+        modal.style.display = "none";
+      }, 400);
+
       //switch doll
       currentDoll = dolls[index];
-      // Close modal
-      modal.style.display = "none";
 
       //re draw the current doll
       currentDoll.draw();

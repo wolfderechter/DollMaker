@@ -50,11 +50,6 @@
 }
 
 .options li {
-  /* background: rgba(128, 128, 128, 0.107); */
-  /* width: 5em;
-    height: 5em;
-    margin: .5em;
-    text-align: center; */
   cursor: pointer;
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.107);
@@ -62,6 +57,8 @@
   display: flex;
   justify-content: center;
   margin-right: 25px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  margin-bottom: 8px;
 }
 
 .options li img {
@@ -84,9 +81,13 @@
   border-radius: 15px;
   list-style: none;
   padding: 40px;
-  margin: 5px 15px;
+  margin-right: 20px;
+  margin-left: 0px;
+  margin-bottom: 15px;
+
   display: inline-block;
   cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .clickedCategory {
@@ -132,8 +133,9 @@
   cursor: pointer;
   background-color: pink;
   border: 0;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 #toggleMultiselectBtn {
@@ -145,8 +147,10 @@
   background-color: rgb(255, 255, 255);
   cursor: pointer;
   border: 0;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  transition: ease-in;
 }
 
 #toggleMultiselectBtn.active {
@@ -163,8 +167,9 @@
   background-color: pink;
   cursor: pointer;
   border: 0;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 .dollsModal {
   display: none; /* Hidden by default */
@@ -193,10 +198,11 @@
 .dollsModal li {
   cursor: pointer;
   border: 1px solid rgba(0, 0, 0, 0.107);
-  border-radius: 15px;
+  border-radius: 5px;
 
   width: 200px;
   margin: 10px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 .dollsModal li img {
@@ -214,6 +220,8 @@
   border: 0;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.35);
+  transform: ease-in;
 }
 
 .modalCard {
@@ -222,6 +230,7 @@
   justify-content: center;
   width: 200px;
   height: 286.5px;
+  transition: ease-in;
 }
 
 .modalCard span {
@@ -242,6 +251,9 @@
 
   .categories a {
     padding: 25px;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
   }
 
   #canvas {
@@ -267,6 +279,8 @@
 
   .options li {
     width: 60px;
+    margin-bottom: 0px;
+    margin-right: 8px;
   }
 
   .options li img {
