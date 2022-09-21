@@ -178,9 +178,10 @@
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
+
 .dollsModal ul {
   list-style: none;
-  margin: 1% auto; /* 15% from the top and centered */
+  margin: 1% auto; /* 1% from the top and centered */
   padding: 20px;
   width: 60%;
   background-color: white;
@@ -200,6 +201,32 @@
 
 .dollsModal li img {
   width: 100%;
+}
+
+#saveDollsBtn {
+  background-color: pink;
+  font-weight: 500;
+  font-size: 22px;
+  display: flex;
+  margin: 0 auto; /* 1% from the top and centered */
+  padding: 20px 40px;
+  justify-content: center;
+  border: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.modalCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  height: 286.5px;
+}
+
+.modalCard span {
+  justify-content: center;
+  text-align: center;
 }
 
 @media screen and (max-width: 500px) {
@@ -272,6 +299,20 @@
     bottom: unset;
     left: 37px;
     top: -380px;
+  }
+
+  .dollsModal li {
+    width: 40%;
+  }
+
+  .modalCard {
+    width: 40%;
+    height: 112px;
+    font-size: 15px;
+  }
+
+  #saveDollsBtn {
+    font-size: 14px;
   }
 }
 
