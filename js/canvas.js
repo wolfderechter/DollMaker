@@ -1,5 +1,7 @@
 const categories = document.querySelectorAll(".categories > a");
 const options = document.getElementById("optionsUl");
+const appliedOptions = document.getElementById("appliedOptions");
+const appliedOptionsOl = document.getElementById("appliedOptionsOl");
 const dollsUl = document.getElementById("dollsUl");
 const canvas = document.getElementById("canvas");
 const exportCanvasBtn = document.getElementById("exportCanvasBtn");
@@ -45,6 +47,8 @@ class Doll {
 
   addOption(option) {
     this.options.push(option);
+
+    renderAppliedOptionsList();
   }
 
   hasOption(category, image) {
@@ -68,6 +72,8 @@ class Doll {
         this.options.splice(index, 1);
       }
     });
+
+    renderAppliedOptionsList();
   }
 
   removeAllOptionsFromCategory(category) {
@@ -79,6 +85,8 @@ class Doll {
         this.options.splice(i, 1);
       }
     }
+
+    renderAppliedOptionsList();
   }
 
   setDataURL(url) {
@@ -94,12 +102,6 @@ class Doll {
     this.options.forEach((opt) => {
       ctx.drawImage(opt.image, 50, 20, 250, 500);
     });
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.drawImage(this.body, 250, 0, 250, 500);
-
-    // this.options.forEach((opt) => {
-    //   ctx.drawImage(opt.image, 250, 0, 250, 500);
-    // });
   }
 }
 
@@ -144,7 +146,7 @@ window.addEventListener("load", () => {
   if (window.innerHeight < 600) {
     canvas.height = window.innerHeight * 0.85;
   } else {
-    canvas.height = window.innerHeight * 0.75;
+    canvas.height = window.innerHeight * 0.60;
   }
   canvas.width = "400";
 
@@ -153,9 +155,18 @@ window.addEventListener("load", () => {
 
 // when resizing the browser window, resize the canvas
 window.addEventListener("resize", () => {
-  // canvas.height = window.innerHeight * 0.75;
-  // canvas.width = window.innerWidth * 0.6;
-  canvas.height = window.innerHeight * 0.75;
+  // if (window.innerHeight < 750) {
+  //   canvas.height = window.innerHeight * 0.85;
+  // } else {
+  //   canvas.height = window.innerHeight * 0.60;
+  // }
+  // if (window.innerHeight * 0.85 > 500) {
+  //   canvas.height = "500";
+  // } else {
+  //   canvas.height = window.innerHeight * 0.85;
+  // }
+
+  canvas.height = "500";
   canvas.width = "400";
 
   currentDoll?.draw();
@@ -227,6 +238,7 @@ categories.forEach((cat) => {
               // => error
               var newOption = new Option(currentCategory, clickedOption.target);
               currentDoll.addOption(newOption);
+
             } else {
               //remove all the previous options in the ui
               const optionsArray = [...options.children];
@@ -234,7 +246,7 @@ categories.forEach((cat) => {
                 option.classList.remove("clickedOption");
               });
 
-              //remove all the previous options in the doll object
+              //remove all the previous options in the doll object because we can only select 1
               currentDoll.removeAllOptionsFromCategory(currentCategory);
 
               //add the new clicked option in the ui
@@ -399,3 +411,83 @@ deleteAllDollsCard.addEventListener("click", () => {
   //remove all children except first two: 'delete all dolls' and 'create new doll'
   removeDollsUlChildren();
 });
+
+// appliedOptions draggable list
+let dragStartIndex;
+var listItems = [];
+
+function renderAppliedOptionsList() {
+  appliedOptionsOl.innerHTML = "";
+  listItems = [];
+
+
+  currentDoll.options.forEach((option2, index) => {
+    var imageClone = option2.image.cloneNode(true);
+    imageClone.draggable = false;
+    var li = document.createElement('li')
+    li.classList.add('appliedOption');
+    li.classList.add('draggable');
+    li.draggable = true;
+    li.setAttribute('data-index', index);
+    li.appendChild(imageClone)
+
+    appliedOptionsOl.appendChild(li)
+    listItems.push(li);
+  })
+  addEventListeners();
+}
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll('.draggable');
+  const draggableListItems = document.querySelectorAll('#appliedOptionsOl li');
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', dragStart);
+
+  })
+  draggableListItems.forEach(draggableListItem => {
+    draggableListItem.addEventListener('dragover', dragOver);
+    draggableListItem.addEventListener('drop', dragDrop);
+    draggableListItem.addEventListener('dragenter', dragEnter);
+    draggableListItem.addEventListener('dragleave', dragLeave);
+  })
+}
+
+function dragStart() {
+  dragStartIndex = +this.closest('li').getAttribute('data-index');
+}
+function dragDrop() {
+  const dragEndIndex = +this.getAttribute('data-index');
+  swapItems(dragStartIndex, dragEndIndex);
+
+  this.classList.remove('dragover')
+}
+function dragOver(e) {
+  e.preventDefault();
+}
+function dragEnter() {
+  this.classList.add('dragover');
+}
+function dragLeave() {
+  this.classList.remove('dragover');
+}
+
+function swapItems(fromIndex, toIndex) {
+  //swap items in the doll
+  const item = currentDoll.options[toIndex]
+  currentDoll.options[toIndex] = currentDoll.options[fromIndex]
+  currentDoll.options[fromIndex] = item
+
+  //re-draw the newly ordered currentdoll options
+  currentDoll.draw();
+  //re-render the currentdoll options in the draggable list
+  //renderAppliedOptionsList()
+  //OR
+  //swap the html items and don't rerender
+  const item1 = listItems[fromIndex].querySelector('img')
+  const item2 = listItems[toIndex].querySelector('img')
+  listItems[toIndex].appendChild(item1)
+  listItems[fromIndex].appendChild(item2)
+
+
+}

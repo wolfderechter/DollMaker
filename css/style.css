@@ -27,10 +27,11 @@
 .options {
   float: right;
   /* margin-right: 35%; */
-  margin-right: -5%;
+  margin-left: 10px;
   /* width: 12%; */
   max-height: 550px;
   overflow-y: auto;
+  overflow-x: hidden;
   visibility: hidden;
 }
 
@@ -171,22 +172,32 @@
   padding: 5px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
+
 .dollsModal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 .dollsModal ul {
   list-style: none;
-  margin: 1% auto; /* 1% from the top and centered */
+  margin: 1% auto;
+  /* 1% from the top and centered */
   padding: 20px;
   width: 60%;
   background-color: white;
@@ -214,7 +225,8 @@
   font-weight: 500;
   font-size: 22px;
   display: flex;
-  margin: 0 auto; /* 1% from the top and centered */
+  margin: 0 auto;
+  /* 1% from the top and centered */
   padding: 20px 40px;
   justify-content: center;
   border: 0;
@@ -236,6 +248,53 @@
 .modalCard span {
   justify-content: center;
   text-align: center;
+}
+
+/* applied options */
+#appliedOptionsOl {
+  overflow-x: auto;
+  margin-top: 5px;
+  width: 500px;
+  white-space: nowrap;
+  padding-left: 0;
+}
+
+.appliedOption {
+  border: 1px solid rgba(0, 0, 0, 0.107);
+  border-radius: 15px;
+  list-style: none;
+  padding: 10px;
+  margin-right: 20px;
+  margin-left: 0px;
+  margin-bottom: 15px;
+
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  /* height: 50px; */
+  width: 60px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.appliedOption img {
+  height: 75px;
+  width: 65%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.draggable {
+  cursor: pointer;
+  background-color: white;
+}
+
+.dragover {
+  background-color: rgb(151, 151, 151);
 }
 
 @media screen and (max-width: 500px) {
@@ -265,7 +324,11 @@
   .options {
     float: none;
     width: 100%;
+    margin-left: 0;
+    overflow-y: hidden;
+    overflow-x: auto;
   }
+
   .options ul {
     /* flex-direction: row;
     flex-wrap: nowrap;
@@ -333,11 +396,14 @@
   .options::-webkit-scrollbar {
     height: 5px;
   }
+
   .categories::-webkit-scrollbar {
     height: 5px;
   }
 }
+
 @media screen and (max-width: 400px) {
+
   /* @media screen and (max-height: 670px) { */
   #canvas {
     width: 280px;
@@ -347,9 +413,11 @@
   #exportCanvasBtn {
     left: 210px;
   }
+
   #switchDollBtn {
     top: -330px;
   }
+
   #toggleMultiselectBtn {
     top: -330px;
     left: 200px;
