@@ -17,6 +17,19 @@ var toggleMultiselect;
 var dolls = [];
 var currentDoll;
 
+// fetch('./file.txt')
+//   .then(response => {
+//     console.log(response)
+//     if (response.ok) {
+//       return response.text()
+//     } else {
+//       throw new Error("File not found")
+//     }
+//   })
+//   .then(text => console.log(text.split("\r\n")))
+//   .catch(err => console.log(err))
+
+// while()
 class Doll {
   constructor() {
     this.options = [];
@@ -143,11 +156,12 @@ if (localStorage.getItem("dolls")) {
 
 window.addEventListener("load", () => {
   // resize the canvas: when small screen enlarge the height so the legs fit the canvas
-  if (window.innerHeight < 600) {
-    canvas.height = window.innerHeight * 0.85;
-  } else {
-    canvas.height = window.innerHeight * 0.60;
-  }
+  // if (window.innerHeight < 600) {
+  //   canvas.height = window.innerHeight * 0.85;
+  // } else {
+  //   canvas.height = window.innerHeight * 0.60;
+  // }
+  canvas.height = "500";
   canvas.width = "400";
 
   currentDoll?.draw();
@@ -168,14 +182,14 @@ window.addEventListener("resize", () => {
 
   canvas.height = "500";
   canvas.width = "400";
-
+  console.log(window.innerWidth)
   currentDoll?.draw();
 });
 
 //Create all the categories, when a category is clicked dynamically create all the corresponding options
 //by loading images from the current category folder and checking if the image exists
 //if the image exists, create a new option li
-categories.forEach((cat) => {
+categories.forEach((cat, index) => {
   cat.addEventListener("click", (cat) => {
     //add animation
     cat.target.style.transform = "scale(1.05)";
@@ -264,6 +278,11 @@ categories.forEach((cat) => {
       };
     }
   });
+
+  //Automatically click on the first category so this category options is shown on screen
+  if (index == 0) {
+    cat.click();
+  }
 });
 
 //Export the canvas to an image

@@ -1,8 +1,14 @@
+:root {
+  --border-radius: 0px;
+  --accent-color: pink;
+}
+
 #body {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  align-items: center;
+  align-content: center;
+  align-items: flex-start;
   justify-content: left;
   width: 100%;
   flex-wrap: wrap;
@@ -10,14 +16,15 @@
 
 #canvas {
   border: 1px solid rgba(0, 0, 0, 0.107);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   border: 0;
   background-color: #fcdced;
   width: 400px;
 }
 
 .canvas {
-  display: inline;
+  display: flex;
+  flex-wrap: wrap;
   position: relative;
   /* width: 700px; */
   /* height: min-content; */
@@ -25,11 +32,8 @@
 }
 
 .options {
-  float: right;
-  /* margin-right: 35%; */
   margin-left: 10px;
-  /* width: 12%; */
-  max-height: 550px;
+  max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
   visibility: hidden;
@@ -48,16 +52,17 @@
   list-style: none;
   padding-left: 0;
   width: 85px;
+  margin-right: 15px;
 }
 
 .options li {
   cursor: pointer;
   justify-content: center;
   border: 1px solid rgba(0, 0, 0, 0.107);
-  border-radius: 15px;
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
-  margin-right: 25px;
+  margin-right: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   margin-bottom: 8px;
 }
@@ -67,26 +72,26 @@
 }
 
 .categories {
-  /* border: 1px solid black; */
-  overflow: auto;
-  /* width: 50%; */
-  margin-top: 20px;
-  /* max-width: 35%; */
-  /* width: 50%; */
-  width: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 16px;
+  /* width: 500px; */
+  width: 100px;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+
 }
 
 .categories a {
   border: 1px solid rgba(0, 0, 0, 0.107);
-  border-radius: 15px;
+  /* border-radius: 15px; */
   list-style: none;
-  padding: 40px;
-  margin-right: 20px;
-  margin-left: 0px;
+  font-size: 14px;
+  padding: 10px 5px;
+  margin-left: 10px;
   margin-bottom: 15px;
-
-  display: inline-block;
+  text-align: center;
   cursor: pointer;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
@@ -98,37 +103,38 @@
 .options::-webkit-scrollbar-thumb {
   background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 99%);
   box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 .options::-webkit-scrollbar {
-  width: 16px;
+  width: 10px;
 }
 
 .options::-webkit-scrollbar-track {
   background-color: #e4e4e473;
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 .categories::-webkit-scrollbar-thumb {
   background-image: linear-gradient(90deg, #d0368a 0%, #708ad4 99%);
   box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 .categories::-webkit-scrollbar {
-  width: 16px;
+  width: 10px;
 }
 
 .categories::-webkit-scrollbar-track {
   background-color: #e4e4e473;
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 #exportCanvasBtn {
   position: absolute;
-  left: 300px;
-  bottom: 13px;
+  left: 10px;
+  top: 465px;
+  /* bottom: 13px; */
   font-size: 12px;
 
   cursor: pointer;
@@ -261,7 +267,7 @@
 
 .appliedOption {
   border: 1px solid rgba(0, 0, 0, 0.107);
-  border-radius: 15px;
+  border-radius: var(--border-radius);
   list-style: none;
   padding: 10px;
   margin-right: 20px;
@@ -271,11 +277,9 @@
   display: inline-block;
   cursor: pointer;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-  /* height: 50px; */
   width: 60px;
   justify-content: center;
   align-items: center;
-
 }
 
 .appliedOption img {
@@ -297,22 +301,41 @@
   background-color: rgb(151, 151, 151);
 }
 
-@media screen and (max-width: 500px) {
-  #body {
-    display: block;
-  }
-
+@media screen and (max-width: 615px) {
   .categories {
-    max-width: 100%;
-    width: 85%;
+    width: 90%;
     margin-top: 5px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .categories a {
     padding: 25px;
     margin: 0;
     margin-right: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+
+  }
+}
+
+@media screen and (max-width: 530px) {
+  #body {
+    display: block;
+  }
+
+  .categories {
+    width: 90%;
+    margin-top: 5px;
+    flex-direction: row;
+  }
+
+  .categories a {
+    padding: 25px;
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 15px;
+
   }
 
   #canvas {
@@ -323,7 +346,7 @@
 
   .options {
     float: none;
-    width: 100%;
+    width: 90%;
     margin-left: 0;
     overflow-y: hidden;
     overflow-x: auto;
@@ -357,15 +380,15 @@
   #exportCanvasBtn {
     right: unset;
     bottom: unset;
-    left: 230px;
-    top: -18px;
+    left: 35px;
+    top: 370px;
   }
 
   #toggleMultiselectBtn {
     right: unset;
     bottom: unset;
-    left: 215px;
-    top: -380px;
+    left: 220px;
+    top: 6px;
   }
 
   .options::-webkit-scrollbar-thumb {
@@ -375,8 +398,8 @@
   #switchDollBtn {
     right: unset;
     bottom: unset;
-    left: 37px;
-    top: -380px;
+    left: 35px;
+    top: 6px;
   }
 
   .dollsModal li {
@@ -404,23 +427,17 @@
 
 @media screen and (max-width: 400px) {
 
-  /* @media screen and (max-height: 670px) { */
-  #canvas {
-    width: 280px;
-    height: 350px;
-  }
-
   #exportCanvasBtn {
-    left: 210px;
+    left: 35px;
   }
 
   #switchDollBtn {
-    top: -330px;
+    top: 5px;
   }
 
   #toggleMultiselectBtn {
-    top: -330px;
-    left: 200px;
+    top: 5px;
+    left: 220px;
   }
 
   .categories a {
