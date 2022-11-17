@@ -381,6 +381,9 @@ function loadDolls() {
           opt.classList.remove("clickedOption");
         }
       });
+
+      //clear the applied options
+      renderAppliedOptionsList()
     });
 
     dollsUl.appendChild(dollOption);
