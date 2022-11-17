@@ -421,6 +421,9 @@ createNewDollCard.addEventListener("click", () => {
   optionsArray.forEach((opt) => {
     opt.classList.remove("clickedOption");
   });
+
+  //clear the applied options
+  renderAppliedOptionsList()
 });
 
 deleteAllDollsCard.addEventListener("click", () => {
