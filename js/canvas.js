@@ -182,7 +182,6 @@ window.addEventListener("resize", () => {
 
   canvas.height = "500";
   canvas.width = "400";
-  console.log(window.innerWidth)
   currentDoll?.draw();
 });
 
@@ -255,7 +254,7 @@ categories.forEach((cat, index) => {
 
             } else {
               //remove all the previous options in the ui
-              const optionsArray = [...options.children];
+              var optionsArray = [...options.children];
               optionsArray.forEach((option) => {
                 option.classList.remove("clickedOption");
               });
@@ -321,7 +320,7 @@ toggleMultiselectBtn.addEventListener("click", () => {
 
     //clear all the previous selected elements
     //remove all the previous options in the ui
-    const optionsArray = [...options.children];
+    var optionsArray = [...options.children];
     optionsArray.forEach((option) => {
       option.classList.remove("clickedOption");
     });
@@ -373,7 +372,7 @@ function loadDolls() {
       currentDoll.draw();
 
       //clear the selected options in the ui and select the options in the currentdoll
-      optionsArray = [...options.children];
+      var optionsArray = [...options.children];
       optionsArray.forEach((opt) => {
         if (currentDoll.hasOption(currentCategory, opt.firstChild)) {
           opt.classList.add("clickedOption");
@@ -417,7 +416,7 @@ createNewDollCard.addEventListener("click", () => {
   currentDoll.draw();
 
   //clear the selected options in the ui
-  optionsArray = [...options.children];
+  var optionsArray = [...options.children];
   optionsArray.forEach((opt) => {
     opt.classList.remove("clickedOption");
   });
